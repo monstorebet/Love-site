@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Для тебе ♥</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Montserrat:wght@400;500;600&display=swap">
+<style>
+:root{--bg1:#fff1f5;--bg2:#ffd3e1;--orb1:#ff9fbf;--orb2:#ffc7a8;--card:rgba(255,255,255,.62);--line:rgba(190,60,110,.18);--text:#4b1730;--accent:#d6336c;--accent2:#ff7aa8;--gold:#b8863b;--muted:#8d5470;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg1:#1c0a14;--bg2:#3a1228;--orb1:#9c2358;--orb2:#6b2a55;--card:rgba(255,255,255,.07);--line:rgba(255,160,200,.2);--text:#ffeaf2;--accent:#ff5c93;--accent2:#ff9bbd;--gold:#e8c06f;--muted:#e0a8c0;color-scheme:dark}}
+:root[data-theme="dark"]{--bg1:#1c0a14;--bg2:#3a1228;--orb1:#9c2358;--orb2:#6b2a55;--card:rgba(255,255,255,.07);--line:rgba(255,160,200,.2);--text:#ffeaf2;--accent:#ff5c93;--accent2:#ff9bbd;--gold:#e8c06f;--muted:#e0a8c0;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;font-family:Montserrat,"Segoe UI",Arial,sans-serif;color:var(--text);background:linear-gradient(160deg,var(--bg1),var(--bg2));background-attachment:fixed;overflow-x:hidden}
+.orb{position:fixed;border-radius:50%;filter:blur(80px);opacity:.55;z-index:0;pointer-events:none;animation:drift 18s ease-in-out infinite alternate}
+.o1{width:380px;height:380px;background:var(--orb1);top:-120px;left:-100px}
+.o2{width:340px;height:340px;background:var(--orb2);bottom:-100px;right:-80px;animation-delay:-8s}
+@keyframes drift{to{transform:translate(60px,50px) scale(1.15)}}
+#hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:1}
+.fh{position:absolute;bottom:-40px;color:var(--accent2);animation:rise linear forwards;opacity:.6;text-shadow:0 0 12px var(--accent)}
+@keyframes rise{to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
+main{position:relative;z-index:2;max-width:680px;margin:0 auto;padding:30px 18px 60px}
+.serif{font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif}
+header{text-align:center;padding:48px 0 14px}
+.big{font-size:58px;color:var(--accent);display:inline-block;animation:beat 1.3s infinite;text-shadow:0 0 28px var(--accent)}
+@keyframes beat{0%,100%{transform:scale(1)}30%{transform:scale(1.2)}60%{transform:scale(1.04)}}
+h1{font-size:clamp(44px,12vw,72px);line-height:1.05;margin:10px 0 8px;font-weight:700;background:linear-gradient(120deg,var(--accent),var(--gold),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--muted);font-size:22px;font-style:italic}
+.line{width:90px;height:2px;margin:18px auto 0;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.card{background:var(--card);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:28px;padding:30px 24px;margin:26px 0;box-shadow:0 18px 50px rgba(214,51,108,.14);text-align:center;opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s}
+.card.in{opacity:1;transform:none}
+h2{margin:0 0 16px;font-size:30px;font-weight:700;color:var(--accent)}
+.poem{white-space:pre-line;font-size:25px;line-height:1.55;min-height:150px;font-style:italic;font-weight:500;transition:opacity .35s}
+.fade{opacity:0}
+button{font:inherit;font-weight:500;font-size:15px;letter-spacing:.3px;cursor:pointer;border:0;border-radius:999px;padding:14px 26px;margin:6px;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 8px 22px rgba(214,51,108,.35);transition:transform .15s}
+button:hover{transform:translateY(-2px) scale(1.04)}
+button:active{transform:scale(.95)}
+button.alt{background:transparent;color:var(--accent);box-shadow:inset 0 0 0 1.5px var(--accent)}
+.counter{font-size:54px;font-weight:700;color:var(--gold);margin:4px 0 10px}
+.reason{font-size:26px;line-height:1.4;min-height:74px;font-style:italic;transition:opacity .3s}
+.final{display:none;font-size:25px;line-height:1.55;margin-top:18px;animation:fin 1s}
+@keyframes fin{from{opacity:0;transform:scale(.95)}}
+.dots{color:var(--muted);font-size:13px;margin:4px 0 10px;min-height:18px}
+footer{text-align:center;color:var(--muted);margin-top:34px;font-size:22px;font-style:italic}
+.pop{position:fixed;pointer-events:none;z-index:6;font-size:24px;color:var(--accent);animation:pop 1.1s ease-out forwards}
+@keyframes pop{to{transform:translate(var(--dx),var(--dy)) scale(1.6);opacity:0}}
+#lang{position:fixed;top:calc(12px + env(safe-area-inset-top,0px));right:14px;z-index:8;display:none;gap:0;border-radius:999px;overflow:hidden;border:1px solid var(--line);background:var(--card);backdrop-filter:blur(10px)}
+#lang button{margin:0;border-radius:0;padding:8px 14px;font-size:13px;background:transparent;color:var(--muted);box-shadow:none}
+#lang button.on{background:var(--accent);color:#fff}
+#gate{position:fixed;inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;background:linear-gradient(160deg,var(--bg1),var(--bg2));transition:opacity .7s,visibility .7s}
+#gate.hide{opacity:0;visibility:hidden}
+#gate .big{font-size:76px}
+#gate h2{font-size:clamp(30px,8vw,44px);color:var(--text);margin:14px 0 4px}
+#gate p{color:var(--muted);margin:0 0 26px;font-size:15px}
+#gate button{display:block;width:240px;margin:8px auto;padding:16px;font-size:17px}
+.yn{position:relative;display:flex;justify-content:center;align-items:center;min-height:120px}
+.bar{height:20px;border-radius:99px;background:var(--line);overflow:hidden;margin:6px 0 12px}
+.fill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--gold));transition:width 2.1s linear}
+input[type=date]{font:inherit;font-size:16px;padding:12px 16px;margin:6px 0;border-radius:14px;border:1.5px solid var(--line);background:var(--card);color:var(--text)}
+.cps{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cp{display:flex;align-items:center;justify-content:center;min-height:84px;padding:12px 10px;border:1.5px dashed var(--accent);border-radius:16px;cursor:pointer;font-size:15px;color:var(--accent);transition:transform .15s}
+.cp:hover{transform:scale(1.03)}
+.cp.on{border-style:solid;background:var(--card);color:var(--text);font-style:italic;font-size:18px}
+.gbox{position:relative;height:260px;overflow:hidden;border-radius:20px;border:1px solid var(--line);margin:8px 0 12px;touch-action:manipulation}
+.gh{position:absolute;top:-50px;color:var(--accent);cursor:pointer;text-shadow:0 0 10px var(--accent2);animation:fall linear forwards;user-select:none}
+@keyframes fall{to{transform:translateY(330px)}}
+input[type=text]{font:inherit;font-size:17px;width:85%;padding:12px 16px;margin:10px 0;border-radius:14px;border:1.5px solid var(--line);background:var(--card);color:var(--text);text-align:center}
+.mg{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:10px 0}
+.mc{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:34px;border-radius:16px;cursor:pointer;background:linear-gradient(135deg,var(--accent),var(--accent2));transition:transform .15s;user-select:none}
+.mc.up{background:var(--card);border:1.5px solid var(--accent)}
+.mc.ok{opacity:.55}
+h2 small{display:block;margin-top:6px;font:400 14px Montserrat,"Segoe UI",Arial,sans-serif;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="orb o1"></div><div class="orb o2"></div>
+<div id="hearts"></div>
+
+<div id="gate">
+  <div class="big">♥</div>
+  <h2 class="serif">Обери мову · Выбери язык</h2>
+  <p>♥</p>
+  <button data-pick="uk">🇺🇦 Українська</button>
+  <button class="alt" data-pick="ru">Русский</button>
+</div>
+
+<div id="lang"><button data-pick="uk">УКР</button><button data-pick="ru">РУС</button></div>
+
+<main>
+  <header>
+    <div class="big">♥</div>
+    <h1 class="serif" data-i="title"></h1>
+    <div class="sub serif" data-i="sub"></div>
+    <div class="line"></div>
+  </header>
+
+  <section class="card">
+    <h2 class="serif" data-i="q_h"></h2>
+    <div class="reason serif" data-i="q_t" style="min-height:0"></div>
+    <div class="yn" id="yn"><button id="yes" data-i="q_y"></button><button class="alt" id="no" data-i="q_n"></button></div>
+    <div class="dots" id="qmsg"></div>
+  </section>
+
+  <section class="card">
+    <h2 class="serif" data-i="m_h"></h2>
+    <div class="bar"><div class="fill" id="mf"></div></div>
+    <div class="counter serif" id="mt" style="font-size:34px">0%</div>
+    <div class="reason serif" id="mres" style="min-height:0;font-size:22px"></div>
+    <button id="mb" data-i="m_b"></button>
+  </section>
+
+  <section class="card">
+    <h2 class="serif" data-i="d_h"></h2>
+    <div class="dots" data-i="d_l"></div>
+    <input type="date" id="dd">
+    <div class="counter serif" id="dres" style="font-size:38px"></div>
+  </section>
+
+  <section class="card">
+    <h2 class="serif"><span data-i="h_why"></span><small data-i="h_why_s"></small></h2>
+    <div class="reason serif" id="reason"></div>
+    <button id="why" data-i="b_why"></button>
+  </section>
+
+  <section class="card">
+    <h2 class="serif" data-i="h_cnt"></h2>
+    <div class="counter serif"><span id="cnt">0</span> ♥</div>
+    <div class="dots" id="tapmsg"></div>
+    <button id="tap" data-i="b_tap"></button>
+  </section>
+
+  <section class="card">
+    <h2 class="serif" data-i="n_h"></h2>
+    <div class="counter serif" id="nk" style="font-size:44px">♥</div>
+    <button id="nb" data-i="n_b"></button>
+  </section>
+
+  <section class="card">
+    <h2 class="serif" data-i="p_h"></h2>
+    <div class="dots" id="pn"></div>
+    <div class="reason serif" id="pq" style="font-size:26px;min-height:60px"></div>
+    <input type="text" id="pa" autocomplete="off">
+    <div><button id="pc" data-i="p_c"></button><button class="alt" id="ph" data-i="p_hint"></button></div>
+    <div class="dots" id="pm" style="font-size:16px"></div>
+  </section>
+
+  <section class="card">
+    <h2 class="serif" data-i="mm_h"></h2>
+    <div class="mg" id="mg"></div>
+    <div class="reason serif" id="mr" style="min-height:0;font-size:22px"></div>
+    <button class="alt" id="mnew" data-i="mm_n"></button>
+  </section>
+
+  <section class="card">
+    <h2 class="serif" data-i="c_h"></h2>
+    <div class="dots" data-i="c_hint"></div>
+    <div class="cps" id="cps"></div>
+  </section>
+
+  <section class="card">
+    <h2 class="serif" data-i="g_h"></h2>
+    <div class="dots"><span data-i="g_s"></span>: <b id="gscore">0</b> &middot; <span id="gtime">15</span>s</div>
+    <div class="gbox" id="gbox"></div>
+    <div class="reason serif" id="gres" style="min-height:0;font-size:22px"></div>
+    <button id="gb" data-i="g_b"></button>
+  </section>
+
+  <section class="card">
+    <h2 class="serif" data-i="h_main"></h2>
+    <button id="sur" data-i="b_sur"></button>
+    <button class="alt" id="rain" data-i="b_rain"></button>
+    <div class="final serif" id="love"></div>
+  </section>
+
+  <footer class="serif" data-i="foot"></footer>
+</main>
+
+<script>
+var T={
+uk:{title:"Зайка, це тобі",h_why_s:"(натисни декілька разів)",
+n_h:"Хто ти для мене?",n_b:"Дізнатись",nicks:["Моя зайка","Мій котик","Моє сонечко","Моя кошечка","Моя принцеса","Моє щастя","Моя зіронька","Моя крихітка","Моя булочка","Моя найкраща"],
+p_h:"Загадки й ребуси",p_c:"Перевірити",p_hint:"Підказка",p_ph:"Твоя відповідь",pok:"Вірно! Далі ♥",pno:"Майже! Спробуй ще або візьми підказку",pwin:"Ти розгадала все! Ти розумниця й моя найкраща зайка ♥",
+puz:[{q:"🙋 + ❤️ + 👉",k:["кохаю","люблю"],h:"Це три слова, які я хочу казати тобі щодня"},{q:"Воно не має голосу, але чутно, як воно б’ється. Воно маленьке, але вміщає цілий світ. Що це?",k:["серц"],h:"Воно в грудях, і воно твоє ♥"},{q:"Що стає більшим, коли ним ділишся?",k:["кохан","любов"],h:"Те, що я відчуваю до тебе"}],
+f_h:"Передбачення на сьогодні",f_b:"Дізнатись долю",fort:["Сьогодні тебе обов’язково хтось міцно обійме","На тебе чекає несподіваний комплімент","Сьогодні буде дуже гарний настрій","Тобі сьогодні неймовірно личить усмішка","Сьогодні ти зустрінеш людину, яка тебе кохає (це я)","Тебе чекає маленький сюрприз","Сьогодні ти найгарніша у світі"],
+mm_h:"Знайди пару",mm_n:"Заново",mwin:"Усі пари знайдено за {n} ходів ♥",
+q_h:"Одне серйозне питання",q_t:"Ти мене любиш?",q_y:"Так",q_n:"Ні",qans:"Я так і знав! Я теж тебе люблю ♥",qno:["Ну ти що?","Подумай ще","Кнопка втекла!","Не вийде","Натисни «Так»","Ну будь ласка…"],
+m_h:"Вимірювач кохання",m_b:"Виміряти",mend:"Шкала зламалась: кохання більше за 100%! ∞",
+d_h:"Скільки ми разом",d_l:"Обери дату, з якої ми разом",dtog:"разом ♥",dfut:"Ця дата ще не настала",
+c_h:"Купони від мене",c_hint:"Торкнись, щоб відкрити",c_open:"Відкрити",coupons:["Обійми без ліміту","Поцілунок за першою вимогою","Спільне фото на пам’ять","Одне бажання, яке я виконаю"],
+g_h:"Лови сердечка",g_b:"Почати гру",g_s:"Піймано",gend:"Піймано сердець: {n}. Але найкраще з них — ти ♥",sub:"маленький сайт з великими почуттями",h_poems:"Вірші для тебе",b_next:"Ще вірш ♥",h_why:"Чому я тебе кохаю",b_why:"Чому?",h_cnt:"Скільки разів я думаю про тебе",b_tap:"Натисни, якщо теж кохаєш мене",h_main:"Найголовніше",b_sur:"Сюрприз",b_rain:"Дощ із сердечок",foot:"Зроблено з любов’ю для моєї зайки",
+why0:"Натисни кнопку, і я скажу ♥",
+love:"Я так радий, що ти в мене є.<br>Я навіть не думав, що така гарна й добра дівчинка мене покохає.<br>Дякую тобі за це диво.<br><b>Я люблю тебе, мій котик!</b> ♥",
+msgs:["І я тебе кохаю ♥","Ти моя найкраща","Я без тебе нікуди","Ти моє сонечко","Ще, ще, не зупиняйся!","Я думаю про тебе щосекунди","Ти моє щастя","Я твій назавжди","Ти — мій дім","Люблю тебе до зірок","Ти найгарніша на світі","Я такий щасливий, що ти є","Цілую тебе міцно","Нескінченно ♥"],
+reasons:["Тому що ти дуже гарна","Тому що в тебе добре серце","Тому що з тобою мені спокійно й тепло","Тому що твоя усмішка робить мій день","Тому що ти обрала мене, а я досі не вірю в своє щастя","Тому що ти просто ти, і цього досить","Тому що поруч із тобою я стаю кращим"]},
+ru:{title:"Зайка, это тебе",h_why_s:"(нажми несколько раз)",
+n_h:"Кто ты для меня?",n_b:"Узнать",nicks:["Моя зайка","Мой котик","Моё солнышко","Моя кошечка","Моя принцесса","Моё счастье","Моя звёздочка","Моя крошка","Моя булочка","Моя самая лучшая"],
+p_h:"Загадки и ребусы",p_c:"Проверить",p_hint:"Подсказка",p_ph:"Твой ответ",pok:"Верно! Дальше ♥",pno:"Почти! Попробуй ещё или возьми подсказку",pwin:"Ты разгадала всё! Ты умница и моя лучшая зайка ♥",
+puz:[{q:"🙋 + ❤️ + 👉",k:["люблю","любл"],h:"Это три слова, которые я хочу говорить тебе каждый день"},{q:"У него нет голоса, но слышно, как оно бьётся. Оно маленькое, но вмещает целый мир. Что это?",k:["серд"],h:"Оно в груди, и оно твоё ♥"},{q:"Что становится больше, когда им делишься?",k:["любов","любл"],h:"То, что я чувствую к тебе"}],
+f_h:"Предсказание на сегодня",f_b:"Узнать судьбу",fort:["Сегодня тебя обязательно кто-то крепко обнимет","Тебя ждёт неожиданный комплимент","Сегодня будет очень хорошее настроение","Тебе сегодня невероятно идёт улыбка","Сегодня ты встретишь человека, который тебя любит (это я)","Тебя ждёт маленький сюрприз","Сегодня ты самая красивая на свете"],
+mm_h:"Найди пару",mm_n:"Заново",mwin:"Все пары найдены за {n} ходов ♥",
+q_h:"Один серьёзный вопрос",q_t:"Ты меня любишь?",q_y:"Да",q_n:"Нет",qans:"Я так и знал! Я тоже тебя люблю ♥",qno:["Ну ты что?","Подумай ещё","Кнопка убежала!","Не выйдет","Нажми «Да»","Ну пожалуйста…"],
+m_h:"Измеритель любви",m_b:"Измерить",mend:"Шкала сломалась: любовь больше 100%! ∞",
+d_h:"Сколько мы вместе",d_l:"Выбери дату, с которой мы вместе",dtog:"вместе ♥",dfut:"Эта дата ещё не наступила",
+c_h:"Купоны от меня",c_hint:"Коснись, чтобы открыть",c_open:"Открыть",coupons:["Объятия без лимита","Поцелуй по первому требованию","Совместное фото на память","Одно желание, которое я выполню"],
+g_h:"Лови сердечки",g_b:"Начать игру",g_s:"Поймано",gend:"Поймано сердечек: {n}. Но лучшее из них — ты ♥",sub:"маленький сайт с большими чувствами",h_poems:"Стихи для тебя",b_next:"Ещё стих ♥",h_why:"Почему я тебя люблю",b_why:"Почему?",h_cnt:"Сколько раз я думаю о тебе",b_tap:"Нажми, если тоже любишь меня",h_main:"Самое главное",b_sur:"Сюрприз",b_rain:"Дождь из сердечек",foot:"Сделано с любовью для моей зайки",
+why0:"Нажми на кнопку, и я скажу ♥",
+love:"Я так рад, что ты у меня есть.<br>Я даже не думал, что такая красивая и добрая девочка полюбит меня.<br>Спасибо тебе за это чудо.<br><b>Я люблю тебя, мой котик!</b> ♥",
+msgs:["И я тебя люблю ♥","Ты моя самая лучшая","Я без тебя никуда","Ты моё солнышко","Ещё, ещё, не останавливайся!","Я думаю о тебе каждую секунду","Ты моё счастье","Я твой навсегда","Ты мой дом","Люблю тебя до звёзд","Ты самая красивая на свете","Я так счастлив, что ты есть","Целую тебя крепко","Бесконечно ♥"],
+reasons:["Потому что ты очень красивая","Потому что у тебя доброе сердце","Потому что с тобой мне спокойно и тепло","Потому что твоя улыбка делает мой день","Потому что ты выбрала меня, а я до сих пор не верю своему счастью","Потому что ты просто ты, и этого достаточно","Потому что рядом с тобой я становлюсь лучше"]}
+};
+var lang="uk",pi=0,ri=-1,n=0;
+var $=function(i){return document.getElementById(i)};
+function save(l){try{localStorage.setItem("lizaLang",l)}catch(e){}}
+function apply(){
+  var d=T[lang];
+  document.documentElement.lang=lang;
+  document.title=lang==="uk"?"Для тебе ♥":"Для тебя ♥";
+  document.querySelectorAll("[data-i]").forEach(function(e){e.textContent=d[e.getAttribute("data-i")]});
+  $("reason").textContent=ri<0?d.why0:d.reasons[ri];
+  $("love").innerHTML=d.love;
+  renderCoupons();days();showP();
+  $("tapmsg").textContent=n?d.msgs[n%d.msgs.length]:"";
+  document.querySelectorAll("#lang button").forEach(function(b){b.classList.toggle("on",b.getAttribute("data-pick")===lang)});
+}
+document.querySelectorAll("[data-pick]").forEach(function(b){
+  b.onclick=function(e){
+    lang=b.getAttribute("data-pick");save(lang);apply();
+    $("gate").classList.add("hide");$("lang").style.display="flex";
+    if(e.clientX){burst(e.clientX,e.clientY,8)}
+  };
+});
+$("why").onclick=function(e){
+  var d=T[lang],r;do{r=Math.floor(Math.random()*d.reasons.length)}while(r===ri);ri=r;
+  var el=$("reason");el.style.opacity=0;
+  setTimeout(function(){el.textContent=d.reasons[r];el.style.opacity=1},250);
+  burst(e.clientX,e.clientY,5);
+};
+$("tap").onclick=function(e){
+  n++;$("cnt").textContent=n;$("tapmsg").textContent=T[lang].msgs[n%T[lang].msgs.length];
+  burst(e.clientX,e.clientY,7);
+};
+$("sur").onclick=function(e){
+  var l=$("love");l.style.display="block";burst(e.clientX,e.clientY,16);rain(40);
+  l.scrollIntoView({behavior:"smooth",block:"center"});
+};
+$("rain").onclick=function(){rain(50)};
+function burst(x,y,k){
+  for(var i=0;i<k;i++){
+    var s=document.createElement("div");s.className="pop";s.textContent="♥";
+    s.style.left=x+"px";s.style.top=y+"px";
+    var a=Math.random()*Math.PI*2,d=50+Math.random()*90;
+    s.style.setProperty("--dx",Math.cos(a)*d+"px");s.style.setProperty("--dy",Math.sin(a)*d+"px");
+    document.body.appendChild(s);setTimeout(function(el){el.remove()},1200,s);
+  }
+}
+function floatHeart(){
+  var h=document.createElement("div");h.className="fh";h.textContent="♥";
+  h.style.left=Math.random()*100+"vw";h.style.fontSize=(12+Math.random()*26)+"px";
+  h.style.animationDuration=(7+Math.random()*7)+"s";
+  $("hearts").appendChild(h);setTimeout(function(){h.remove()},14500);
+}
+function rain(k){for(var i=0;i<k;i++)setTimeout(floatHeart,i*80)}
+setInterval(floatHeart,1000);
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in")}})},{threshold:.15});
+document.querySelectorAll(".card").forEach(function(c){io.observe(c)});
+var qn=0,opened={},gs=0,gt=null,gi=null,mi=null;
+function runNo(e){if(e.preventDefault)e.preventDefault();var c=$("yn"),b=$("no");
+  b.style.position="absolute";
+  b.style.left=Math.random()*(c.clientWidth-b.offsetWidth)+"px";
+  b.style.top=Math.random()*(c.clientHeight-b.offsetHeight)+"px";
+  var a=T[lang].qno;$("qmsg").textContent=a[qn++%a.length];}
+$("no").addEventListener("mouseenter",runNo);
+$("no").addEventListener("touchstart",runNo,{passive:false});
+$("no").onclick=runNo;
+$("yes").onclick=function(e){$("qmsg").textContent=T[lang].qans;burst(e.clientX,e.clientY,18);rain(40)};
+$("mb").onclick=function(e){
+  var f=$("mf"),t=$("mt"),b=$("mb"),v=0;if(mi)return;
+  f.style.transition="none";f.style.width="0%";void f.offsetWidth;f.style.transition="";f.style.width="100%";
+  mi=setInterval(function(){v+=2;if(v>=100){clearInterval(mi);mi=null;t.textContent="∞";$("qmsg");burst(window.innerWidth/2,window.innerHeight/2,18);rain(30);$("mt").setAttribute("title",T[lang].mend);$("mres").textContent=T[lang].mend}else t.textContent=v+"%"},42);
+  $("mres").textContent="";
+};
+function pl(n){var a=n%10,b=n%100,few=a>=2&&a<=4&&(b<12||b>14);
+  if(lang==="uk")return a==1&&b!=11?"день":(few?"дні":"днів");
+  return a==1&&b!=11?"день":(few?"дня":"дней");}
+function days(){
+  var v=$("dd").value,r=$("dres");if(!v){r.textContent="";return}
+  var a=new Date(v+"T00:00:00"),b=new Date();b.setHours(0,0,0,0);
+  var n=Math.round((b-a)/864e5);
+  if(n<0){r.textContent=T[lang].dfut;return}
+  r.textContent=n+" "+pl(n)+" "+T[lang].dtog;
+}
+$("dd").onchange=function(){try{localStorage.setItem("lizaDate",$("dd").value)}catch(e){}days()};
+try{var sd=localStorage.getItem("lizaDate");if(sd)$("dd").value=sd}catch(e){}
+function renderCoupons(){
+  var d=T[lang],box=$("cps");box.innerHTML="";
+  d.coupons.forEach(function(t,i){
+    var c=document.createElement("div");c.className="cp"+(opened[i]?" on":"");
+    c.textContent=opened[i]?t:d.c_open;
+    c.onclick=function(e){if(!opened[i]){opened[i]=1;burst(e.clientX,e.clientY,6);renderCoupons()}};
+    box.appendChild(c);
+  });
+}
+function spawn(){
+  var h=document.createElement("span");h.className="gh";h.textContent="♥";
+  h.style.left=Math.random()*85+"%";h.style.fontSize=(26+Math.random()*20)+"px";
+  h.style.animationDuration=(2.2+Math.random()*1.4)+"s";
+  h.onpointerdown=function(e){gs++;$("gscore").textContent=gs;burst(e.clientX,e.clientY,3);h.remove()};
+  $("gbox").appendChild(h);setTimeout(function(){h.remove()},4000);
+}
+$("gb").onclick=function(){
+  if(gt)return;gs=0;$("gscore").textContent=0;$("gres").textContent="";$("gbox").innerHTML="";
+  var left=15;$("gtime").textContent=left;gi=setInterval(spawn,520);
+  gt=setInterval(function(){left--;$("gtime").textContent=left;
+    if(left<=0){clearInterval(gi);clearInterval(gt);gt=null;$("gbox").innerHTML="";
+      $("gres").textContent=T[lang].gend.replace("{n}",gs);burst(window.innerWidth/2,window.innerHeight/2,14)}},1000);
+};
+var pidx=0,mem={};
+$("nb").onclick=function(e){var a=T[lang].nicks;$("nk").textContent=a[Math.floor(Math.random()*a.length)];burst(e.clientX,e.clientY,8)};
+function showP(){var d=T[lang],q=$("pq");$("pa").placeholder=d.p_ph;$("pa").value="";$("pm").textContent="";
+  if(pidx>=d.puz.length){$("pn").textContent="";q.textContent="♥";$("pm").textContent=d.pwin;return}
+  $("pn").textContent=(pidx+1)+" / "+d.puz.length;q.textContent=d.puz[pidx].q}
+$("pc").onclick=function(e){var d=T[lang];if(pidx>=d.puz.length)return;
+  var v=$("pa").value.toLowerCase().replace(/[^a-zа-яёіїєґ ]/g,"");
+  var ok=d.puz[pidx].k.some(function(k){return v.indexOf(k)>-1});
+  if(ok){pidx++;burst(window.innerWidth/2,e.clientY||300,12);showP();if(pidx>=d.puz.length)rain(50);else $("pm").textContent=d.pok}
+  else{$("pm").textContent=d.pno}};
+$("ph").onclick=function(){if(pidx<T[lang].puz.length)$("pm").textContent=T[lang].puz[pidx].h};
+$("pa").onkeydown=function(e){if(e.key==="Enter")$("pc").click()};
+function newMem(){var em=["🐰","🐱","❤️","🌹","⭐","🌙"],cs=em.concat(em).sort(function(){return Math.random()-.5}),g=$("mg");
+  g.innerHTML="";mem={a:null,lock:false,found:0,moves:0};$("mr").textContent="";
+  cs.forEach(function(x){var c=document.createElement("div");c.className="mc";c.setAttribute("data-e",x);c.onclick=function(){flip(c)};g.appendChild(c)})}
+function flip(c){if(mem.lock||c.classList.contains("up"))return;c.classList.add("up");c.textContent=c.getAttribute("data-e");
+  if(!mem.a){mem.a=c;return}
+  var a=mem.a;mem.a=null;mem.moves++;
+  if(a.getAttribute("data-e")===c.getAttribute("data-e")){a.classList.add("ok");c.classList.add("ok");mem.found++;
+    if(mem.found===6){$("mr").textContent=T[lang].mwin.replace("{n}",mem.moves);burst(window.innerWidth/2,window.innerHeight/2,16);rain(40)}}
+  else{mem.lock=true;setTimeout(function(){a.classList.remove("up");c.classList.remove("up");a.textContent="";c.textContent="";mem.lock=false},800)}}
+$("mnew").onclick=newMem;newMem();
+apply();
+</script>
+</body>
+</html>
